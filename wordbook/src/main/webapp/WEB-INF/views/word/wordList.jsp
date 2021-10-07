@@ -64,8 +64,10 @@
 
  				if(favorite == 'B' ) {
  					$("#like_img"+word_order+">img").attr("src", "/resources/image/emptyheart.png");
+ 					B = favorite.replace('B','A');
 				}else {
 					$("#like_img"+word_order+">img").attr("src", "/resources/image/heart.png");
+					A = favorite.replace('A','B');
 				} 
 			},
 				error : function(e) {
