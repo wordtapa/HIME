@@ -43,38 +43,34 @@
 				<script type="text/javascript">
 				
 				var A = 'A';
-				    
-				function like_func(word_order, favorite){
 				
-					
-					$.ajax({
-						url:"/word/favorite",
-						type : "post",
-						data : {
-							word_order : word_order,
-							favorite : favorite
+				function like_func(word_order, favorite){
+					var check = confirm("ARE YOU SURE YOU MEMORIZED IT??")
+						if(check == true) {
+						
+							$.ajax({
+								url:"/word/favorite",
+								type : "post",
+								data : {
+									word_order : word_order,
+									favorite : favorite
+								}
+							,success : function() {
+								//console.log(check)
+								alert("MEMORIZED!!")
+								$("#like_img"+word_order).parent("td").parent("tr").remove();
+							},
+							 error : function(e) {
+								console.log(e);
+							}							   
+							});
 						}
-					,success : function() {
-						alert(word_order); 
-			 		 	console.log("favorite: " + favorite);
-		
-		 				if(favorite == 'A' ) {
-		 					$("#like_img"+word_order).DataTable({
-		 						columnDefs: [
-		 							{targets:word_order, visible:false}
-		 						]
-		 					
-		 					})
-						}else {
-							$("#like_img"+word_order+">img").attr("src", "/resources/image/heart.png");
-						} 
-					},
-						error : function(e) {
-							console.log(e);
-					}
-					   });
-					} 
-					
+						else{
+							//console.log(check)
+							alert("NOT YET")
+							
+						}
+				}
 			</script>
 </head>
 <body>
@@ -83,7 +79,7 @@
 	<c:if test="${empty wordList}">
 			<table border ="1">
 				<tr>
-					<th>🤍</th>
+					<th>🔷</th>
 					<th>LANGUAGE</th>
 					<th>WORD</th>
 					<th>KOREAN</th>
@@ -113,8 +109,8 @@
 				</tr>
 				
 				<c:forEach items ="${wordList }" var = "word">
-				<tr>
-					<td>💜
+				<tr id = "${word.WORD_ORDER }">
+					<td>🔷
 					<input type = "hidden" name = "word_order" value = "${word.WORD_ORDER }"></td>
 					<c:if test="${word.LANGUAGE == '영어' }">
 						<td>ENGLISH</td>
