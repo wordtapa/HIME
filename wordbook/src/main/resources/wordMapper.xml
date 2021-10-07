@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.test.dao.wordMapper">
+	<select id="allList" parameterType="String" resultType="word">
+  		select
+  			word_order	as word_order
+  			,id	as id 
+  			,language	as language 
+  			,word as word
+  			,word_kor as word_kor
+  			,word_sentence as word_sentence
+  			,word_explain as word_explain
+  			,favorite as favorite
+  		from
+  			word_list
+  		where
+  			id = #{id}	
+  		order by
+  			word_order asc
+  	</select>
+	
+	 <insert id = "writeWord" parameterType = "word">
+  		insert into
+  			word_list(
+  				word_order
+  				,id
+  				,language
+  				,word
+  				,word_kor
+  				,word_sentence
+  				,word_explain
+  			)values(
+  			 	word_order_seq.nextval
+  			 	,#{id}
+  			 	,#{language}
+  			 	,#{word}
+  			 	,#{word_kor}
+  			 	,#{word_sentence}
+  			 	,#{word_explain}
+  			)
+  	</insert>
+  	
+	<select id="readWord" parameterType="int" resultType="word">
+		select
+				word_order as word_order
+	  			,id	as id 
+	  			,language as language 
+	  			,word as word
+	  			,word_kor as word_kor
+	  			,word_sentence as word_sentence
+	  			,word_explain as word_explain
+	  			,favorite as favorite
+		from
+			word_list
+		where
+			word_order = #{word_order }
+	</select>
+
+	<update id= "updateWord" parameterType="word">
+		update
+			word_list
+		set
+			language = #{language }
+			,word = #{word }
+			,word_kor = #{word_kor }
+			,word_sentence = #{word_sentence }
+			,word_explain = #{word_explain }		
+		where
+			word_order = #{word_order }
+	</update>
+	
+	<delete id = "deleteWord" parameterType = "int">
+		delete from
+			word_list
+		where
+			word_order = #{word_order }
+	</delete>
+	
+  	<select id = "getBoardList" parameterType= "HashMap" resultType="HashMap">
+		select
+		    wt.word_order as word_order
+		    ,wt.id as id
+		    ,wt.language as language
+		    ,wt.word as word
+		    ,wt.word_kor as word_kor
+		    ,wt.word_sentence as word_sentence
+		    ,wt.word_explain as word_explain
+		    ,wt.favorite as favorite
+		from
+		    word_list wt, 
+		    (
+		    	select 
+		    			rownum as r_num, 
+		    			word_order as word_order 
+		    			from 
+		    				word_list
+		    			where
+		    				id = #{id}
+		    			order by 
+		    				word_order desc
+		    ) rt
+		where
+		    rt.r_num between #{startRecord } + 1 and #{startRecord } + #{countPerPage } <!-- 10이라고 써도 됨 -->
+		    and
+		    wt.word_order = rt.word_order
+		order by
+	    	word_order desc
+	</select>
+	
+
+	
+	<select id="getTotalCount" parameterType="String" resultType="int">
+		select 
+			count(*) as totalRecordsCount
+		from 
+			word_list
+		where
+			id = #{id}
+	</select>
+	
+	<update id="changeFavorite" parameterType="word">
+		update
+			word_list
+		<set>
+			<if test = 'favorite == "A"'>
+				favorite = 'B'
+			</if>
+			<if test = 'favorite != "A"'>
+				favorite = 'A'
+			</if>
+		</set>	
+		where
+			word_order = #{word_order}
+	</update>
+	
+	<select id="practice" parameterType ="String" resultType="word">
+		select
+	  			word_order	as word_order
+	  			,id	as id 
+	  			,language	as language 
+	  			,word as word
+	  			,word_kor as word_kor
+	  			,word_sentence as word_sentence
+	  			,word_explain as word_explain
+	  			,favorite as favorite
+	  		from
+	  			word_list
+	  		where
+	  			id = #{id}	
+	  			and
+	  			favorite = 'A'
+	  		order by
+	  			word_order desc
+  	</select>
+  	
+	<select id = "getBoardList1" parameterType= "HashMap" resultType="HashMap">
+		select
+		    wt.word_order as word_order
+		    ,wt.id as id
+		    ,wt.language as language
+		    ,wt.word as word
+		    ,wt.word_kor as word_kor
+		    ,wt.word_sentence as word_sentence
+		    ,wt.word_explain as word_explain
+		    ,wt.favorite as favorite
+		from
+		    (
+		    	select
+		    		*
+		    	from
+		    		word_list
+		    	where
+		    		id = #{id}
+		    		and
+		    		favorite = 'A'
+		    ) wt, 
+		    (
+		    	select 
+		    			rownum as r_num, 
+		    			word_order as word_order 
+		    			from 
+		    				word_list
+		    			where
+		    				id = #{id}
+		    				and
+		    				favorite = 'A'
+		    			order by 
+		    				word_order desc
+		    ) rt
+		where
+		    rt.r_num between #{startRecord } + 1 and #{startRecord } + 10 <!-- 10이라고 써도 됨 -->
+		    and
+		    wt.word_order = rt.word_order
+		order by
+	    	word_order desc
+	</select>
+	
+	<select id="getTotalCount_1" parameterType="word" resultType="int">
+		select 
+			count(*) as totalRecordsCount
+		from 
+			word_list
+		where
+			id = #{id}
+		and
+			favorite = 'A'
+	</select>
+	
+	
+</mapper>
