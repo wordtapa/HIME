@@ -1,23 +1,18 @@
+create table word_user(
+    id varchar2(20) 		primary key 
+    ,password varchar2(20)  not null
+    ,name varchar2(30) 	    not null 
+);
+
 create table word_list (
-    word_order      number      primary key
-    ,id 			varchar2(20) references word_user not null
-    ,language       varchar2(20)      not null
+    word_order      number      	primary key
+    ,id 			varchar2(20) 	references word_user not null
+    ,language       varchar2(20)    not null
     ,word           varchar2(20)    not null
     ,word_kor       varchar2(50)    not null
     ,word_sentence  varchar2(2000)  
     ,word_explain   varchar2(4000)
-);
-
-create table word_fav (
-    word_order      number      references word_list not null
-    ,id 			varchar2(20) references word_user not null
-    ,word_num       number      default 0
-);
-
-create table word_user(
-    id varchar2(20) primary key 
-    ,password varchar2(20) not null
-    ,name varchar2(30) not null 
+    ,favorite		varchar2(20)	default 'A' not null
 );
 
 create sequence word_order_seq nocache;

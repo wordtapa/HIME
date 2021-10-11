@@ -44,7 +44,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	public String idCheck(String id) {
-		logger.info("idCheck 메소드 실행(GET)");
+		logger.info("idCheck 메소드 실행(POST)");
 		
 		logger.info("memberId: {}", id);
 		
@@ -86,8 +86,8 @@ public class MemberController {
 		}
 		
 		return returnUrl;
-	
 	}
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		logger.info("logout 메소드 실행(GET)");

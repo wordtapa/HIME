@@ -20,12 +20,12 @@
 	</insert>
 	
 	<select id="selectMemberId" parameterType="String" resultType="String">
-			select
-				id
-			from
-				word_user
-			where
-				id = #{id }
+		select
+			id
+		from
+			word_user
+		where
+			id = #{id }
 	</select>
 	
 	<select id="selectMember" parameterType="member" resultType="String">
@@ -40,5 +40,5 @@
   			password = #{password}
   			</if>
   		</select>	
-  		
+  		  		
 </mapper>

@@ -38,7 +38,6 @@ public class memberDAO {
 		return result;
 	
 	}
-
 	public String selectMember(memberVO loginMember) {
 		String result = null;
 		memberMapper mapper = null;
@@ -51,5 +50,6 @@ public class memberDAO {
 		}
 		return result;
 	}
+	
 
 }

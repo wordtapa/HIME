@@ -32,8 +32,6 @@ public class memberService {
 		return dao.selectMemberId(id);
 	}
 
-
-
 	public String selectMember(String id, String password) {
 		memberVO loginMember = new memberVO();
 		loginMember.setId(id);

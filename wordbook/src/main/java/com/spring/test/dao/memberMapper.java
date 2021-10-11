@@ -8,7 +8,6 @@ public interface memberMapper {
 	
 	String selectMemberId(String id);
 
-	String selectMember(memberVO loginMember);
-	
+	String selectMember(memberVO loginMember);	
 
 }
