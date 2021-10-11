@@ -29,8 +29,6 @@ public interface wordMapper {
 
 	ArrayList<HashMap<String, Object>> getBoardList1(HashMap<String, Object> map);
 
-	
-
 
 
 }

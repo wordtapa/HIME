@@ -36,20 +36,19 @@ public class WordController {
 	private static final int COUNT_PER_PAGE = 10; // 페이지 당 글 수(ex. 1~10, 11~20, 21~30)
 	private static final int PAGE_PER_GROUP = 5; // 그룹 당 페이지 수 (ex. 12345, 678910, 1112)
 	
-	@RequestMapping(value="/wordList0" , method = RequestMethod.GET)
-	public String wordList(String id, Model model) {
-		logger.info("wordList 메소드 실행(GET)");
-		model.addAttribute("id", id);
-		logger.info("id: {}" , id);
-		
-		ArrayList<wordVO> wordList = service.allList(id); 
-		
-		logger.info("wordList: {}", wordList);
-		model.addAttribute("wordList", wordList);
-		
-		
-		return "redirect:/word/paging?=id"+id;
-	}
+	
+	  @RequestMapping(value="/wordList0" , method = RequestMethod.GET) public String
+	  wordList(String id, Model model) { logger.info("wordList 메소드 실행(GET)");
+	  model.addAttribute("id", id); logger.info("id: {}" , id);
+	  
+	  ArrayList<wordVO> wordList = service.allList(id);
+	  
+	  logger.info("wordList: {}", wordList); model.addAttribute("wordList",
+	  wordList);
+	  
+	  
+	  return "redirect:/word/paging?=id"+id; }
+	 
 	
 	@RequestMapping(value="/wordList" , method = RequestMethod.GET)
 	public String wordList(String id, Model model, int currentPage) {
@@ -184,6 +183,17 @@ public class WordController {
 		logger.info("res: {}", res);
 		
 	}
+	/*
+	 * @RequestMapping(value="/favorite_change", method = RequestMethod.GET) public
+	 * HashMap<String, Object> favorite_change() {
+	 * 
+	 * HashMap<String, Object> map = new HashMap<>(); String favorite_ch =
+	 * service.favorite_change();
+	 * 
+	 * map.put("favorite_ch", favorite_ch);
+	 * 
+	 * return map; }
+	 */
 	
 	@RequestMapping(value="/practice" , method = RequestMethod.GET)
 	public String practice(String id, Model model) {
@@ -227,4 +237,5 @@ public class WordController {
 		
 		return "practice/practice";
 	}
+	
 }
