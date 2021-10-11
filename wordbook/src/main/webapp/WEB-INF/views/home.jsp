@@ -10,7 +10,7 @@
 	<style type="text/css">
 
 		img {
-			width : 44.5%;
+			width : 41%;
 			height : auto;
 			float: left;
 		}
@@ -59,7 +59,7 @@
 			padding:10px;
 			box-sizing : border-box;
 			position: relative;
-			top: 200px;
+			top: 300px;
 		}
 
 	</style>
